@@ -14,13 +14,20 @@ Install python requirements.
 pip install -r requirements.txt
 ```
 
+Install usgs_datatools (locally for now)
+
+```
+# Clone or download this packagage and change directory into the top level
+pip install .
+```
+
 ### Examples
 
 Please see the notebook directory for a sample of DOI Tool usage (querying, creating, modifying).
 
 ### Contributions
 
-All kinds of contibutions are greatly appreicated, please see the ```CONTRIBUTING.rst`` file for more information (link)[./CONTRIBUTING.rst]
+All kinds of contibutions are greatly appreicated, please see the ```CONTRIBUTING.rst`` file for more information [link](https://github.com/bserna-usgs/usgs_datatools/blob/master/CONTRIBUTING.rst)
 
 ### Credits
 
