@@ -9,10 +9,10 @@ warnings.filterwarnings("ignore")  # avoid confusion for cert issues
 
 def service_picker(doi_configuration_url):
     """Choses which doi service to use"""
-    if doi_configuration_url != 'p' or 'P':
-        return 'https://www1-staging.snafu.cr.usgs.gov/csas/doi/'
-    else:
+    if doi_configuration_url.lower() == 'p':
         return 'https://www1.usgs.gov/csas/doi/'
+    else:
+        return 'https://www1-staging.snafu.cr.usgs.gov/csas/doi/'
 
 
 def doi_authenticate(r, url, username, password):
@@ -79,7 +79,7 @@ def doi_create(r, url, doi, cookie_jar):
     url = service_picker(url)
     try:
         post_url = url + 'result.htm'
-        update_doi = r.post('https://www1-staging.snafu.cr.usgs.gov/csas/doi/result.htm', cookies =cookie_jar, data=doi, verify=False)
+        update_doi = r.post(post_url, cookies =cookie_jar, data=doi, verify=False)
 
         print("Updated DOI: " + str(doi))
         return update_doi

@@ -28,7 +28,7 @@ test_requirements = [
 
 setup(
     name='usgs_datatools',
-    version='0.1.0',
+    version='0.2.0',
     description="Data management tools for USGS. ",
     long_description=readme + '\n\n' + history,
     author="Brandon Serna",
