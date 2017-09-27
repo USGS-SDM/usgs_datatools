@@ -21,11 +21,31 @@ pip install .
 
 Please see the examples/notebook directory for a sample of DOI Tool usage (querying, creating, modifying).
 
+Datacite queries can be ran using the new ```doi.datacite_search(10.5066/xxxxx)``` method.
+
 ### Contributions
 
 All kinds of contibutions are greatly appreicated, please see the ```CONTRIBUTING.rst``` file for more information [link](https://github.com/bserna-usgs/usgs_datatools/blob/master/CONTRIBUTING.rst)
 
-### Credits 
+
+### Testing
+
+Testing is setup using pytest and can be started using the command below.
+
+```sh
+python -m pytest tests/
+```
+
+### Development
+
+Update versions
+
+```sh
+bumpversion  --current-version 0.2.0 minor --allow-dirty
+```
+
+
+### Credits
 
 Python, Requests, BeautifulSoup, PyYaml, Cookiecutter: [cookiecutter](https://github.com/audreyr/cookiecutter), audreyr/cookiecutter-pypackage: [link](https://github.com/audreyr/cookiecutter-pypackage), PyTest
 

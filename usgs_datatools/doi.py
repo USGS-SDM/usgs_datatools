@@ -7,6 +7,16 @@ import warnings
 warnings.filterwarnings("ignore")  # avoid confusion for cert issues
 
 
+def datacite_search(doi):
+    """ Datacite API Querying """
+    try:
+        doi = doi.replace('doi:','')  # If improper format strip.
+        r = requests.get('https://api.datacite.org/works/' + str(doi))
+        return r.json()
+    except Exception as e:
+        print(e)
+
+
 def service_picker(doi_configuration_url):
     """Choses which doi service to use"""
     if doi_configuration_url.lower() == 'p':
