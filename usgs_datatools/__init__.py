@@ -4,4 +4,4 @@
 
 __author__ = """Brandon Serna"""
 __email__ = 'bserna@usgs.gov'
-__version__ = '0.1.0'
+__version__ = '__version__ = '0.2.0''
