@@ -41,6 +41,10 @@ python -m pytest tests/
 Update versions
 
 ```sh
+# preferred and w/o commit 
+bumpversion minor
+
+# old
 bumpversion  --current-version 0.2.0 minor --allow-dirty
 ```
 
