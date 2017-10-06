@@ -38,7 +38,7 @@ class DoiSession():
         response = self._session.post(self._base_doi_url + 'j_spring_security_check', data = {'j_username': self._username, 'j_password': password, '_csrf': self._csrf}, verify = False) # , verify = False
 
         if 'crowd.token_key' not in self._session.cookies:
-            raise Excetion('Login failed')
+            raise Exception('Login failed')
         self._crowdToken = self._session.cookies['crowd.token_key']
         return self
 

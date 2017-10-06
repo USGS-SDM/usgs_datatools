@@ -1,0 +1,54 @@
+usgs\_datatools package
+=======================
+
+Submodules
+----------
+
+usgs\_datatools\.cli module
+---------------------------
+
+.. automodule:: usgs_datatools.cli
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+usgs\_datatools\.doi module
+---------------------------
+
+.. automodule:: usgs_datatools.doi
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+usgs\_datatools\.mp module
+--------------------------
+
+.. automodule:: usgs_datatools.mp
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+usgs\_datatools\.old\_doi module
+--------------------------------
+
+.. automodule:: usgs_datatools.old_doi
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+usgs\_datatools\.usgs\_datatools module
+---------------------------------------
+
+.. automodule:: usgs_datatools.usgs_datatools
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: usgs_datatools
+    :members:
+    :undoc-members:
+    :show-inheritance:

@@ -13,6 +13,7 @@ from click.testing import CliRunner
 
 from usgs_datatools import usgs_datatools
 import usgs_datatools.doi as doi
+import usgs_datatools.mp as mp
 from usgs_datatools import cli
 
 
@@ -53,7 +54,15 @@ def test_doi_auth():
 
     if 'crowd.token_key' in test._session.cookies:
         assert True
-    #assert type(test) == tuple
+
+
+def test_doi_auth_failure():
+    """Test authentication failure"""
+    doi_session = doi.DoiSession()
+    try:
+        doi_session.doi_authenticate('fake_user', 'fake_password')
+    except:
+        assert True
 
 
 def test_doi_get_doi():
@@ -67,3 +76,9 @@ def test_doi_get_doi():
     sample_doi = doi_session.get_doi('doi:10.5072/FK2J38SV7D')
 
     assert len(sample_doi) > 20
+
+
+def test_mp_validate():
+    """Test MP local file validate"""
+    file_notes = mp.validate('./tests/BlueRidgeParkway.xml')
+    assert type(file_notes) == dict
