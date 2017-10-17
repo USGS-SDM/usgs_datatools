@@ -142,3 +142,21 @@ def datacite_search(doi):
         return r.json()
     except Exception as e:
         print(e)
+
+
+def add_primary_doi_manager(doi_dict, username):
+    """ Utility function to add additional doi tool manager (primary)
+    :param doi_dict: dictionary that represents a doi
+    :param username: AD username
+    """
+    key = 'usersAndTypes[' + username + ']'
+    doi_dict[key] = 'PRIMARY'
+
+
+def add_backup_doi_manager(doi_dict, username):
+    """ Utility function to add additional doi tool manager (backup)
+    :param doi_dict: dictionary that represents a doi
+    :param username: AD username
+    """
+    key = 'usersAndTypes[' + username + ']'
+    doi_dict[key] = 'BACKUP'
