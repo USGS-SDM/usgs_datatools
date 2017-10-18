@@ -122,6 +122,9 @@ class DoiSession():
 
         :returns: post response
         """
+        doi['_csrf'] = self._csrf  # Required for form submit.
+        doi['save'] = 'Submit'  # Required for form submit.
+
         response_create = self._session.post(self._base_doi_url + 'result.htm', data=doi, verify=False)
 
         # Retrieve DOI
