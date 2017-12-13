@@ -1,6 +1,22 @@
 # USGS Data Tools
 
-A python package to assist with data management best practices. Currently it supports functionality with the USGS Digitial Object Identifier Tool but will soon expand to more tools.  
+An in-progress python package to assist with data management best practices. This package is more tailored for internal functionality however it would be great to include more capabilities for general data management processes. 
+
+##### USGS Digital Object Identifer Tool (internal)
+
+✅ Create DOI
+
+✅ Get a DOI
+
+✅ Update a DOI
+
+##### Datacite 
+
+✅ Query DOI 
+
+##### Metadata Parser 
+
+✅ Validate local XML file
 
 ### Quick Start
 
@@ -10,7 +26,13 @@ Install python requirements
 pip install -r requirements.txt
 ```
 
-Install usgs_datatools (locally for now)
+Git Install 
+
+```
+pip install -e git+https://github.com/bserna-usgs/usgs_datatools.git@c4cae0459ba61dc7a9a606827e781fdbde8abf1a#egg=usgs_datatools
+```
+
+Or install usgs_datatools (locally)
 
 ```
 # Clone or download this packagage and change directory into the top level

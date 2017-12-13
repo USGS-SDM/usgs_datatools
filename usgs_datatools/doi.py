@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """USGS DOI Tool module."""
-import yaml
 import requests
 from bs4 import BeautifulSoup
 import warnings
@@ -16,12 +15,13 @@ class DoiSession():
         """
         if env == 'production':
             self._base_doi_url = 'https://www1.usgs.gov/csas/doi/'
+        if env == 'dev':
+            self._base_doi_url = 'https://www1-dev.snafu.cr.usgs.gov/csas/doi/'
         else:
             print('Using Staging Environment\n')
             self._base_doi_url = 'https://www1-staging.snafu.cr.usgs.gov/csas/doi/'
 
         self._session = requests.Session()
-
 
     def doi_authenticate(self, username, password):
         """ Authentication function for the usgs doi tool.
@@ -42,9 +42,9 @@ class DoiSession():
         self._crowdToken = self._session.cookies['crowd.token_key']
         return self
 
-
     def get_doi(self, doi):
         """ Get DOI attributes function that returns the doi fields as a dictionary.
+        Note: Verify the status field is the intended state of the DOI. (reserved/public)
 
         :parm doi: DOI string ('doi:10.5066/F7SB43S8')
 
@@ -98,10 +98,10 @@ class DoiSession():
                     fields[i.get('name')] = ii.get('value')
         try:
             del fields[None]
-        except:
+        except Exception:
             pass
+        fields['status'] = 'reserved'  # Scraping issue defaults to "public" -- tmp fix
         return fields
-
 
     def doi_update(self, doi):
         """ Updating an existing DOI.
@@ -111,9 +111,7 @@ class DoiSession():
         :returns: post response status code
         """
         response_update = self._session.post(self._base_doi_url + 'result.htm', data=doi, verify=False)
-        print("Updated DOI: " + str(doi['identifier']))
         return response_update.status_code
-
 
     def doi_create(self, doi):
         """ Reserving a DOI.
@@ -127,10 +125,14 @@ class DoiSession():
 
         response_create = self._session.post(self._base_doi_url + 'result.htm', data=doi, verify=False)
 
-        # Retrieve DOI
-        doi_number = response_create.text.split('Your DOI has been saved: ')[1].split('</div>')[0].replace(" ","").replace("\n","")
-        print("Created DOI: " + str(doi_number))
-        return doi_number
+        if response_create.status_code == 200:
+            try:
+                # Retrieve DOI
+                doi_number = response_create.text.split('Your DOI has been saved: ')[1].split('</div>')[0].replace(" ", "").replace("\n", "")
+                return doi_number
+            except Exception as e:
+                return('Sorry an error occured with the data sent into the DOI Tool. Please ensure all required fields are filled out.')
+        return('An error occured, status code: ' + str(response_create.status_code))
 
 
 def datacite_search(doi):
@@ -140,7 +142,7 @@ def datacite_search(doi):
     :type: str
     """
     try:
-        doi = doi.replace('doi:','')  # If improper format strip.
+        doi = doi.replace('doi:', '')  # If improper format strip.
         r = requests.get('https://api.datacite.org/works/' + str(doi))
         return r.json()
     except Exception as e:
@@ -163,3 +165,4 @@ def add_backup_doi_manager(doi_dict, username):
     """
     key = 'usersAndTypes[' + username + ']'
     doi_dict[key] = 'BACKUP'
+
