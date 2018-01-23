@@ -14,9 +14,11 @@ class DoiSession():
         :param env: optional default is "staging"
         """
         if env == 'production':
-            self._base_doi_url = 'https://www1.usgs.gov/csas/doi/'
+            self._base_doi_url = 'https://www1.usgs.gov/csas/doi/api/csrf'
         if env == 'dev':
-            self._base_doi_url = 'https://www1-dev.snafu.cr.usgs.gov/csas/doi/'
+            self._base_doi_url = 'https://www1-dev.snafu.cr.usgs.gov/csas/doi/api/csrf'
+        if env == 'local':
+            self._base_doi_url = 'https://localhost:8443/doi/api/csrf'
         else:
             print('Using Staging Environment\n')
             self._base_doi_url = 'https://www1-staging.snafu.cr.usgs.gov/csas/doi/'
@@ -31,10 +33,9 @@ class DoiSession():
         """
         # Fetch application cookie for follow requests.
         cookie_getter = self._session.get(self._base_doi_url, verify=False)
-
-        self._csrf = str(cookie_getter.content).split('name="_csrf" value="')[1].split('"')[0]
+        self._csrf = cookie_getter.headers['X-CSRF-TOKEN']
         self._username = username  # Save username
-
+        self._base_doi_url = 'https://localhost:8443/doi/'
         response = self._session.post(self._base_doi_url + 'j_spring_security_check', data = {'j_username': self._username, 'j_password': password, '_csrf': self._csrf}, verify = False) # , verify = False
 
         if 'crowd.token_key' not in self._session.cookies:
