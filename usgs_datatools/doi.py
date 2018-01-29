@@ -22,6 +22,7 @@ class DoiSession():
         else:
             print('Using Staging Environment\n')
             self._base_doi_url = 'https://www1-staging.snafu.cr.usgs.gov/csas/doi/'
+        self._api_auth_url = self._base_doi_url + 'api/csrf'
 
         self._session = requests.Session()
 
@@ -32,8 +33,7 @@ class DoiSession():
         :param password: Current USGS user password (Acitve Directory).
         """
         # Fetch application cookie for follow requests.
-        self._base_api_url = 'https://localhost:8443/doi/api/csrf'
-        cookie_getter = self._session.get(self._base_api_url, verify=False)
+        cookie_getter = self._session.get(self._api_auth_url, verify=False)
         self._csrf = cookie_getter.headers['X-CSRF-TOKEN']
         self._username = username  # Save username
         response = self._session.post(self._base_doi_url + 'j_spring_security_check', data = {'j_username': self._username, 'j_password': password, '_csrf': self._csrf}, verify = False) # , verify = False
@@ -84,25 +84,12 @@ class DoiSession():
          'usersAndTypes[justinwright@usgs.gov]': 'PRIMARY',
          'usersAndTypes[myTest]': 'PRIMARY'}
         """
-        fields = {}
-        fetch = self._session.get(self._base_doi_url + 'form.htm?doi=' + doi, verify=False)
-        soup = BeautifulSoup(fetch.text)
-
-        for inp in soup.find_all('input', ):
-            fields[inp.get('name')] = inp.get('value')
-        for ta in soup.find_all('textarea',):
-            fields[ta.get('name')] = ta.text
-        for i in soup.find_all('select'):
-            o = i.find_all('option')
-            for ii in o:
-                if ii.get('selected'):
-                    fields[i.get('name')] = ii.get('value')
-        try:
-            del fields[None]
-        except Exception:
-            pass
-        fields['status'] = 'reserved'  # Scraping issue defaults to "public" -- tmp fix
-        return fields
+        fetch = self._session.get(self._base_doi_url + 'api/read.json?identifier=' + doi, verify=False).json()
+        if fetch['results']['responseHeader']['status'] == 200:
+            return fetch['results']['response']
+        else:
+            # Return the error message bundle
+            return fetch['results']['responseHeader']  # ['error']
 
     def doi_update(self, doi):
         """ Updating an existing DOI.
@@ -111,8 +98,8 @@ class DoiSession():
 
         :returns: post response status code
         """
-        response_update = self._session.post(self._base_doi_url + 'result.htm', data=doi, verify=False)
-        return response_update.status_code
+        response_update = self._session.post(self._base_doi_url + 'api/update', data=doi, verify=False)
+        return response_update
 
     def doi_create(self, doi):
         """ Reserving a DOI.
