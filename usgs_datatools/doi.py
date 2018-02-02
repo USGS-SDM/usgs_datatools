@@ -21,7 +21,7 @@ class DoiSession():
             self._base_doi_url = 'https://localhost:8443/doi/'
         else:
             print('Using Staging Environment\n')
-            self._base_doi_url = 'https://www1-staging.snafu.cr.usgs.gov/csas/doi/'
+            self._base_doi_url = 'https://www1-staging.snafu.cr.usgs.gov/csas/doi/'			
         self._api_auth_url = self._base_doi_url + 'api/csrf'
 
         self._session = requests.Session()
@@ -98,7 +98,9 @@ class DoiSession():
 
         :returns: post response status code
         """
-        response_update = self._session.post(self._base_doi_url + 'api/update', data=doi, verify=False)
+
+        self._session.headers.update({'X-CSRF-TOKEN': self._csrf, "content-type": "application/x-www-form-urlencoded", "referer": "http://sciencebase.gov"})
+        response_update = self._session.post(self._base_doi_url + 'api/update.json', data=doi, verify=False)
         return response_update
 
     def doi_create(self, doi):
@@ -106,22 +108,13 @@ class DoiSession():
 
         :param doi: DOI Attributes as a dictionary.
 
-        :returns: post response
+        :returns: post response status code
         """
-        doi['_csrf'] = self._csrf  # Required for form submit.
-        doi['save'] = 'Submit'  # Required for form submit.
+        
+        self._session.headers.update({'X-CSRF-TOKEN': self._csrf, "content-type": "application/x-www-form-urlencoded", "referer": "http://sciencebase.gov"})
+        response_create = self._session.post(self._base_doi_url + 'api/create.json', data=doi, verify=False)
 
-        response_create = self._session.post(self._base_doi_url + 'result.htm', data=doi, verify=False)
-
-        if response_create.status_code == 200:
-            try:
-                # Retrieve DOI
-                doi_number = response_create.text.split('Your DOI has been saved: ')[1].split('</div>')[0].replace(" ", "").replace("\n", "")
-                return doi_number
-            except Exception as e:
-                return('Sorry an error occured with the data sent into the DOI Tool. Please ensure all required fields are filled out.')
-        return('An error occured, status code: ' + str(response_create.status_code))
-
+        return response_create
 
 def datacite_search(doi):
     """ Datacite API Querying
