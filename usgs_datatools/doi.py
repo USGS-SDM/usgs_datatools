@@ -16,7 +16,7 @@ class DoiSession():
         if env == 'production':
             self._base_doi_url = 'https://www1.usgs.gov/csas/doi/'
         if env == 'dev':
-            self._base_doi_url = 'https://www1-dev.snafu.cr.usgs.gov/csas/doi/'
+            self._base_doi_url = 'https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/'
         else:
             print('Using Staging Environment\n')
             self._base_doi_url = 'https://www1-staging.snafu.cr.usgs.gov/csas/doi/'
@@ -29,6 +29,10 @@ class DoiSession():
         :param username: Current USGS username (Active Directory).
         :param password: Current USGS user password (Acitve Directory).
         """
+        if self._base_doi_url == 'https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/':
+            self._session.post(self._base_doi_url + 'login', json={'username': username,
+                                                                   'password': password})
+            return self
         # Fetch application cookie for follow requests.
         cookie_getter = self._session.get(self._base_doi_url, verify=False)
 
@@ -83,6 +87,8 @@ class DoiSession():
          'usersAndTypes[justinwright@usgs.gov]': 'PRIMARY',
          'usersAndTypes[myTest]': 'PRIMARY'}
         """
+        if self._base_doi_url == 'https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/':
+            return self._session.get(self._base_doi_url + 'doi/' + doi).json()
         fields = {}
         fetch = self._session.get(self._base_doi_url + 'form.htm?doi=' + doi, verify=False)
         soup = BeautifulSoup(fetch.text)
@@ -119,19 +125,25 @@ class DoiSession():
         :param doi: DOI Attributes as a dictionary.
 
         :returns: post response
+
+        >>> doi_create(doi_dict)
         """
+        if self._base_doi_url == 'https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/':
+            return self._session.post(self._base_doi_url + 'doi', json=doi).text
         doi['_csrf'] = self._csrf  # Required for form submit.
         doi['save'] = 'Submit'  # Required for form submit.
 
         response_create = self._session.post(self._base_doi_url + 'result.htm', data=doi, verify=False)
 
-        if response_create.status_code == 200:
-            try:
-                # Retrieve DOI
-                doi_number = response_create.text.split('Your DOI has been saved: ')[1].split('</div>')[0].replace(" ", "").replace("\n", "")
+        try:
+            # Retrieve DOI
+            doi_number = response_create.text.split('Your DOI has been saved: ')[1].split('</div>')[0].replace(" ", "").replace("\n", "")
+            if 'doi' in doi_number:
                 return doi_number
-            except Exception as e:
-                return('Sorry an error occured with the data sent into the DOI Tool. Please ensure all required fields are filled out.')
+            else:
+                return None
+        except Exception as e:
+            return('Sorry an error occured with the data sent into the DOI Tool. Please ensure all required fields are filled out.')
         return('An error occured, status code: ' + str(response_create.status_code))
 
 
