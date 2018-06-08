@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-"""USGS DOI Tool module."""
 import requests
 from bs4 import BeautifulSoup
 import warnings
@@ -7,7 +6,7 @@ warnings.filterwarnings("ignore")  # avoid confusion for cert issues
 
 
 class DoiSession():
-    """ DoiSession enables actions to be taken on the USGS DOI Tool"""
+    """DoiSession enables actions to be taken on the USGS DOI Tool"""
     def __init__(self, env='staging'):
         """init
 
@@ -18,20 +17,18 @@ class DoiSession():
         if env == 'dev':
             self._base_doi_url = 'https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/'
         else:
-            print('Using Staging Environment\n')
             self._base_doi_url = 'https://www1-staging.snafu.cr.usgs.gov/csas/doi/'
 
         self._session = requests.Session()
 
     def doi_authenticate(self, username, password):
-        """ Authentication function for the usgs doi tool.
+        """Authentication function for the usgs doi tool.
 
         :param username: Current USGS username (Active Directory).
         :param password: Current USGS user password (Acitve Directory).
         """
         if self._base_doi_url == 'https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/':
-            self._session.post(self._base_doi_url + 'login', json={'username': username,
-                                                                   'password': password})
+            self._session.post(self._base_doi_url + 'login', json={'username': username, 'password': password})
             return self
         # Fetch application cookie for follow requests.
         cookie_getter = self._session.get(self._base_doi_url, verify=False)
@@ -39,7 +36,7 @@ class DoiSession():
         self._csrf = str(cookie_getter.content).split('name="_csrf" value="')[1].split('"')[0]
         self._username = username  # Save username
 
-        response = self._session.post(self._base_doi_url + 'j_spring_security_check', data = {'j_username': self._username, 'j_password': password, '_csrf': self._csrf}, verify = False) # , verify = False
+        self._session.post(self._base_doi_url + 'j_spring_security_check', data = {'j_username': self._username, 'j_password': password, '_csrf': self._csrf}, verify=False)
 
         if 'crowd.token_key' not in self._session.cookies:
             raise Exception('Login failed')
@@ -47,7 +44,7 @@ class DoiSession():
         return self
 
     def get_doi(self, doi):
-        """ Get DOI attributes function that returns the doi fields as a dictionary.
+        """Get DOI attributes function that returns the doi fields as a dictionary.
         Note: Verify the status field is the intended state of the DOI. (reserved/public)
 
         :parm doi: DOI string ('doi:10.5066/F7SB43S8')
@@ -116,6 +113,8 @@ class DoiSession():
 
         :returns: post response status code
         """
+        if self._base_doi_url == 'https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/':
+            return self._session.put(self._base_doi_url + 'doi', json=doi).text
         response_update = self._session.post(self._base_doi_url + 'result.htm', data=doi, verify=False)
         return response_update.status_code
 
@@ -129,7 +128,7 @@ class DoiSession():
         >>> doi_create(doi_dict)
         """
         if self._base_doi_url == 'https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/':
-            return self._session.post(self._base_doi_url + 'doi', json=doi).text
+            return self._session.post(self._base_doi_url + 'doi/' + doi['doi'], json=doi).text
         doi['_csrf'] = self._csrf  # Required for form submit.
         doi['save'] = 'Submit'  # Required for form submit.
 
