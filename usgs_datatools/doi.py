@@ -47,6 +47,15 @@ class DoiSession():
         self._crowdToken = self._session.cookies['crowd.token_key']
         return self
 
+    def get_my_dois(self):
+        """Current users dois"""
+        response_status = self._session.get(self._base_doi_url + 'doi/' + 'all')
+        if response_status.status_code == 200:
+            return response_status.json()
+        else:
+            return {'error': response_status.status_code,
+                    'message': response_status.text}
+
     def get_doi(self, doi):
         """Get DOI attributes function that returns the doi fields as a dictionary.
         Note: Verify the status field is the intended state of the DOI. (reserved/public)
