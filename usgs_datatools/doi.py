@@ -114,7 +114,7 @@ class DoiSession():
         :returns: post response status code
         """
         if self._base_doi_url == 'https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/':
-            return self._session.put(self._base_doi_url + 'doi', json=doi).text
+            return self._session.put(self._base_doi_url + 'doi/' + doi['doi'], json=doi).json()
         response_update = self._session.post(self._base_doi_url + 'result.htm', data=doi, verify=False)
         return response_update.status_code
 
@@ -128,7 +128,7 @@ class DoiSession():
         >>> doi_create(doi_dict)
         """
         if self._base_doi_url == 'https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/':
-            return self._session.post(self._base_doi_url + 'doi/' + doi['doi'], json=doi).text
+            return self._session.post(self._base_doi_url + 'doi/', json=doi).text
         doi['_csrf'] = self._csrf  # Required for form submit.
         doi['save'] = 'Submit'  # Required for form submit.
 
