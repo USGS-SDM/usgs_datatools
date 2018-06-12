@@ -28,15 +28,19 @@ class DoiSession():
         :param password: Current USGS user password (Acitve Directory).
         """
         if self._base_doi_url == 'https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/':
-            self._session.post(self._base_doi_url + 'login', json={'username': username, 'password': password})
-            return self
+            response_status = self._session.post(self._base_doi_url + 'login', json={'username': username, 'password': password})
+            if response_status.status_code == 200:
+                return self
+            else:
+                return {'error': response_status.status_code,
+                        'message': response_status.text}
         # Fetch application cookie for follow requests.
         cookie_getter = self._session.get(self._base_doi_url, verify=False)
 
         self._csrf = str(cookie_getter.content).split('name="_csrf" value="')[1].split('"')[0]
         self._username = username  # Save username
 
-        self._session.post(self._base_doi_url + 'j_spring_security_check', data = {'j_username': self._username, 'j_password': password, '_csrf': self._csrf}, verify=False)
+        self._session.post(self._base_doi_url + 'j_spring_security_check', data={'j_username': self._username, 'j_password': password, '_csrf': self._csrf}, verify=False)
 
         if 'crowd.token_key' not in self._session.cookies:
             raise Exception('Login failed')
@@ -85,7 +89,12 @@ class DoiSession():
          'usersAndTypes[myTest]': 'PRIMARY'}
         """
         if self._base_doi_url == 'https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/':
-            return self._session.get(self._base_doi_url + 'doi/' + doi).json()
+            response_status = self._session.get(self._base_doi_url + 'doi/' + doi)
+            if response_status == 200:
+                return response_status.json()
+            else:
+                return {'error': response_status.status_code,
+                        'message': response_status.text}
         fields = {}
         fetch = self._session.get(self._base_doi_url + 'form.htm?doi=' + doi, verify=False)
         soup = BeautifulSoup(fetch.text)
@@ -114,7 +123,12 @@ class DoiSession():
         :returns: post response status code
         """
         if self._base_doi_url == 'https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/':
-            return self._session.put(self._base_doi_url + 'doi/' + doi['doi'], json=doi).json()
+            response_status = self._session.put(self._base_doi_url + 'doi/' + doi['doi'], json=doi)
+            if response_status.status_code == 200:
+                return response_status.json()
+            else:
+                return {'error': response_status.status_code,
+                        'message': response_status.text}
         response_update = self._session.post(self._base_doi_url + 'result.htm', data=doi, verify=False)
         return response_update.status_code
 
@@ -128,7 +142,12 @@ class DoiSession():
         >>> doi_create(doi_dict)
         """
         if self._base_doi_url == 'https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/':
-            return self._session.post(self._base_doi_url + 'doi/', json=doi).text
+            response_status = self._session.post(self._base_doi_url + 'doi/', json=doi)
+            if response_status.status_code == 200:
+                return response_status.text
+            else:
+                return {'error': response_status.status_code,
+                        'message': response_status.text}
         doi['_csrf'] = self._csrf  # Required for form submit.
         doi['save'] = 'Submit'  # Required for form submit.
 
