@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-"""USGS DOI Tool module."""
 import requests
 from bs4 import BeautifulSoup
 import warnings
@@ -7,7 +6,7 @@ warnings.filterwarnings("ignore")  # avoid confusion for cert issues
 
 
 class DoiSession():
-    """ DoiSession enables actions to be taken on the USGS DOI Tool"""
+    """DoiSession enables actions to be taken on the USGS DOI Tool"""
     def __init__(self, env='staging'):
         """init
 
@@ -16,34 +15,49 @@ class DoiSession():
         if env == 'production':
             self._base_doi_url = 'https://www1.usgs.gov/csas/doi/'
         if env == 'dev':
-            self._base_doi_url = 'https://www1-dev.snafu.cr.usgs.gov/csas/doi/'
+            self._base_doi_url = 'https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/'
         else:
-            print('Using Staging Environment\n')
             self._base_doi_url = 'https://www1-staging.snafu.cr.usgs.gov/csas/doi/'
 
         self._session = requests.Session()
 
     def doi_authenticate(self, username, password):
-        """ Authentication function for the usgs doi tool.
+        """Authentication function for the usgs doi tool.
 
         :param username: Current USGS username (Active Directory).
         :param password: Current USGS user password (Acitve Directory).
         """
+        if self._base_doi_url == 'https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/':
+            response_status = self._session.post(self._base_doi_url + 'login', json={'username': username, 'password': password})
+            if response_status.status_code == 200:
+                return self
+            else:
+                return {'error': response_status.status_code,
+                        'message': response_status.text}
         # Fetch application cookie for follow requests.
         cookie_getter = self._session.get(self._base_doi_url, verify=False)
 
         self._csrf = str(cookie_getter.content).split('name="_csrf" value="')[1].split('"')[0]
         self._username = username  # Save username
 
-        response = self._session.post(self._base_doi_url + 'j_spring_security_check', data = {'j_username': self._username, 'j_password': password, '_csrf': self._csrf}, verify = False) # , verify = False
+        self._session.post(self._base_doi_url + 'j_spring_security_check', data={'j_username': self._username, 'j_password': password, '_csrf': self._csrf}, verify=False)
 
         if 'crowd.token_key' not in self._session.cookies:
             raise Exception('Login failed')
         self._crowdToken = self._session.cookies['crowd.token_key']
         return self
 
+    def get_my_dois(self):
+        """Current users dois"""
+        response_status = self._session.get(self._base_doi_url + 'doi/' + 'all')
+        if response_status.status_code == 200:
+            return response_status.json()
+        else:
+            return {'error': response_status.status_code,
+                    'message': response_status.text}
+
     def get_doi(self, doi):
-        """ Get DOI attributes function that returns the doi fields as a dictionary.
+        """Get DOI attributes function that returns the doi fields as a dictionary.
         Note: Verify the status field is the intended state of the DOI. (reserved/public)
 
         :parm doi: DOI string ('doi:10.5066/F7SB43S8')
@@ -83,6 +97,13 @@ class DoiSession():
          'usersAndTypes[justinwright@usgs.gov]': 'PRIMARY',
          'usersAndTypes[myTest]': 'PRIMARY'}
         """
+        if self._base_doi_url == 'https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/':
+            response_status = self._session.get(self._base_doi_url + 'doi/' + doi)
+            if response_status == 200:
+                return response_status.json()
+            else:
+                return {'error': response_status.status_code,
+                        'message': response_status.text}
         fields = {}
         fetch = self._session.get(self._base_doi_url + 'form.htm?doi=' + doi, verify=False)
         soup = BeautifulSoup(fetch.text)
@@ -110,6 +131,13 @@ class DoiSession():
 
         :returns: post response status code
         """
+        if self._base_doi_url == 'https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/':
+            response_status = self._session.put(self._base_doi_url + 'doi/' + doi['doi'], json=doi)
+            if response_status.status_code == 200:
+                return response_status.json()
+            else:
+                return {'error': response_status.status_code,
+                        'message': response_status.text}
         response_update = self._session.post(self._base_doi_url + 'result.htm', data=doi, verify=False)
         return response_update.status_code
 
@@ -119,19 +147,30 @@ class DoiSession():
         :param doi: DOI Attributes as a dictionary.
 
         :returns: post response
+
+        >>> doi_create(doi_dict)
         """
+        if self._base_doi_url == 'https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/':
+            response_status = self._session.post(self._base_doi_url + 'doi/', json=doi)
+            if response_status.status_code == 200:
+                return response_status.text
+            else:
+                return {'error': response_status.status_code,
+                        'message': response_status.text}
         doi['_csrf'] = self._csrf  # Required for form submit.
         doi['save'] = 'Submit'  # Required for form submit.
 
         response_create = self._session.post(self._base_doi_url + 'result.htm', data=doi, verify=False)
 
-        if response_create.status_code == 200:
-            try:
-                # Retrieve DOI
-                doi_number = response_create.text.split('Your DOI has been saved: ')[1].split('</div>')[0].replace(" ", "").replace("\n", "")
+        try:
+            # Retrieve DOI
+            doi_number = response_create.text.split('Your DOI has been saved: ')[1].split('</div>')[0].replace(" ", "").replace("\n", "")
+            if 'doi' in doi_number:
                 return doi_number
-            except Exception as e:
-                return('Sorry an error occured with the data sent into the DOI Tool. Please ensure all required fields are filled out.')
+            else:
+                return None
+        except Exception as e:
+            return('Sorry an error occured with the data sent into the DOI Tool. Please ensure all required fields are filled out.')
         return('An error occured, status code: ' + str(response_create.status_code))
 
 
