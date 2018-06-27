@@ -33,6 +33,7 @@ pylint = "*"
 "pep8" = "*"
 lxml = "*"
 pandas = "*"
+black = "*"
 
 [requires]
 python_version = "3.6"

@@ -1,42 +1,68 @@
 # USGS Data Tools
 
-An in-progress python package to assist with data management best practices. This package is more tailored for internal functionality however it would be great to include more capabilities for general data management processes. 
+A python package to assist with data management best practices.
 
-##### USGS Digital Object Identifer Tool (internal)
+##### USGS Digital Object Identifer Tool (internal tool)
 
-✅ Create DOI
+This module supports a python wrapper ontop of the usgs doi tool. 
 
-✅ Get a DOI
+✅ User sessions
 
-✅ Update a DOI
+✅ Creating digital object identifiers
+
+✅ Update digital object identifiers
+
+✅ Query the tool
 
 ##### Datacite 
+
+Convienience function to query a DOI that's in DataCite to return attributes.
 
 ✅ Query DOI 
 
 ##### Metadata Parser 
 
-✅ Validate local XML file
+✅ Validate local files (XML)
 
 ### Quick Start
 
-Install python requirements
+```python
+from usgs_datatools import doi
+
+doi_session = doi.DoiSession()
+doi_session.doi_authenticate("someperson@usgs.gov", "somepassword")
+
+# Get DOI
+my_doi = doi_session.get_doi("doi:10.5066/xxxx")
+
+# Create DOI
+doi_session.doi_create({'title': 'USGS Datatools Test Creation',
+                        'datasource_id': '17501', 
+            		   'status': 'reserved'})
+```
+
+### Install 
+
+The preferred method for installation is using the latest version release here on github.
+
+```sh
+pip install -e git+https://github.com/bserna-usgs/usgs_datatools.git@latest
+```
+
+__Local files__
+
+If you are working with a downloaded copy of this package here's some helpful steps
+
+Install python requirements (using pipenv)
+
+```
+pipenv install
+```
+
+I will periodically update the requirements.txt file as well
 
 ```
 pip install -r requirements.txt
-```
-
-Git Install 
-
-```
-pip install -e git+https://github.com/bserna-usgs/usgs_datatools.git@c4cae0459ba61dc7a9a606827e781fdbde8abf1a#egg=usgs_datatools
-```
-
-Or install usgs_datatools (locally)
-
-```
-# Clone or download this packagage and change directory into the top level
-pip install .
 ```
 
 ### Examples
@@ -69,11 +95,6 @@ bumpversion minor
 # old
 bumpversion  --current-version 0.2.0 minor --allow-dirty
 ```
-
-
-### Credits
-
-Python, Requests, BeautifulSoup, PyYaml, Cookiecutter: [cookiecutter](https://github.com/audreyr/cookiecutter), audreyr/cookiecutter-pypackage: [link](https://github.com/audreyr/cookiecutter-pypackage), PyTest
 
 <hr>
 
