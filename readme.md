@@ -96,6 +96,14 @@ bumpversion minor
 bumpversion  --current-version 0.2.0 minor --allow-dirty
 ```
 
+### Documentation
+
+Go into the docs folder and build
+
+```
+make html
+```
+
 <hr>
 
 ### Provisional Software Disclaimer Under USGS Software Release Policy, the software codes here are considered preliminary, not released officially, and posted to this repo for informal sharing among colleagues.
