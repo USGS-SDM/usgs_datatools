@@ -1,7 +1,0 @@
-usgs_datatools
-==============
-
-.. toctree::
-   :maxdepth: 4
-
-   usgs_datatools

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>USGS Data Tools Python Package &#8212; usgs_datatools 0.3.0 documentation</title>
+    <title>USGS Data Tools &#8212; usgs_datatools 0.3.0 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -42,11 +42,37 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="usgs-data-tools-python-package">
-<h1>USGS Data Tools Python Package<a class="headerlink" href="#usgs-data-tools-python-package" title="Permalink to this headline">¶</a></h1>
-<p>A python package to assist with data management best practices. Currently it supports functionality with the USGS Digital Object Identifier Tool but will soon expand to more tools.</p>
+  <div class="section" id="usgs-data-tools">
+<h1>USGS Data Tools<a class="headerlink" href="#usgs-data-tools" title="Permalink to this headline">¶</a></h1>
+<p>A python package to assist with data management best practices.</p>
+<p>USGS Digital Object Identifer Tool (internal tool)</p>
+<p>This module supports a python wrapper ontop of the usgs doi tool.</p>
+<p>✅ User sessions</p>
+<p>✅ Creating digital object identifiers</p>
+<p>✅ Update digital object identifiers</p>
+<p>✅ Query the tool</p>
+<p>Datacite</p>
+<p>Convienience function to query a DOI that&#8217;s in DataCite to return attributes.</p>
+<p>✅ Query DOI</p>
+<p>Metadata Parser</p>
+<p>✅ Validate local files (XML)</p>
 <div class="section" id="quick-start">
 <h2>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">usgs_datatools</span> <span class="k">import</span> <span class="n">doi</span>
+
+<span class="n">doi_session</span> <span class="o">=</span> <span class="n">doi</span><span class="o">.</span><span class="n">DoiSession</span><span class="p">()</span>
+<span class="n">doi_session</span><span class="o">.</span><span class="n">doi_authenticate</span><span class="p">(</span><span class="s2">&quot;someperson@usgs.gov&quot;</span><span class="p">,</span> <span class="s2">&quot;somepassword&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get DOI</span>
+<span class="n">my_doi</span> <span class="o">=</span> <span class="n">doi_session</span><span class="o">.</span><span class="n">get_doi</span><span class="p">(</span><span class="s2">&quot;doi:10.5066/xxxx&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create DOI</span>
+<span class="n">doi_session</span><span class="o">.</span><span class="n">doi_create</span><span class="p">({</span><span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;USGS Datatools Test Creation&#39;</span><span class="p">,</span>
+                        <span class="s1">&#39;datasource_id&#39;</span><span class="p">:</span> <span class="s1">&#39;17501&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="s1">&#39;reserved&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+<p><code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-e</span> <span class="pre">git+https://github.com/bserna-usgs/usgs_datatools.git&#64;latest</span></code></p>
 <p>Install python requirements</p>
 <p><code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-r</span> <span class="pre">requirements.txt</span></code></p>
 <p>Install usgs_datatools (locally for now)</p>
@@ -128,7 +154,7 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">USGS Data Tools Python Package</a><ul>
+<li><a class="reference internal" href="#">USGS Data Tools</a><ul>
 <li><a class="reference internal" href="#quick-start">Quick Start</a></li>
 <li><a class="reference internal" href="#examples">Examples</a></li>
 <li><a class="reference internal" href="#contributions">Contributions</a></li>

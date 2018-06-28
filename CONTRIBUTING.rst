@@ -42,6 +42,9 @@ usgs_datatools could always use more documentation, whether as part of the
 official usgs_datatools docs, in docstrings, or even on the web in blog posts,
 articles, and such.
 
+Currently the documentation can be built within the docs folder using the command:
+    $ make html
+
 Submit Feedback
 ~~~~~~~~~~~~~~~
 
