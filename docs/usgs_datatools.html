@@ -1,0 +1,424 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>usgs_datatools package &#8212; usgs_datatools 0.3.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.3.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Contributing" href="contributing.html" />
+    <link rel="prev" title="usgs_datatools" href="modules.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="usgs-datatools-package">
+<h1>usgs_datatools package<a class="headerlink" href="#usgs-datatools-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-usgs_datatools.cli">
+<span id="usgs-datatools-cli-module"></span><h2>usgs_datatools.cli module<a class="headerlink" href="#module-usgs_datatools.cli" title="Permalink to this headline">¶</a></h2>
+<p>Console script for usgs_datatools.</p>
+</div>
+<div class="section" id="module-usgs_datatools.doi">
+<span id="usgs-datatools-doi-module"></span><h2>usgs_datatools.doi module<a class="headerlink" href="#module-usgs_datatools.doi" title="Permalink to this headline">¶</a></h2>
+<p>USGS DOI Tool module.</p>
+<dl class="class">
+<dt id="usgs_datatools.doi.DoiSession">
+<em class="property">class </em><code class="descclassname">usgs_datatools.doi.</code><code class="descname">DoiSession</code><span class="sig-paren">(</span><em>env='staging'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/usgs_datatools/doi.html#DoiSession"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#usgs_datatools.doi.DoiSession" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>DoiSession enables actions to be taken on the USGS DOI Tool</p>
+<dl class="method">
+<dt id="usgs_datatools.doi.DoiSession.doi_authenticate">
+<code class="descname">doi_authenticate</code><span class="sig-paren">(</span><em>username</em>, <em>password</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/usgs_datatools/doi.html#DoiSession.doi_authenticate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#usgs_datatools.doi.DoiSession.doi_authenticate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Authentication function for the usgs doi tool.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>username</strong> &#8211; Current USGS username (Active Directory).</li>
+<li><strong>password</strong> &#8211; Current USGS user password (Acitve Directory).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="usgs_datatools.doi.DoiSession.doi_create">
+<code class="descname">doi_create</code><span class="sig-paren">(</span><em>doi</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/usgs_datatools/doi.html#DoiSession.doi_create"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#usgs_datatools.doi.DoiSession.doi_create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reserving a DOI.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>doi</strong> &#8211; DOI Attributes as a dictionary.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">post response</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="usgs_datatools.doi.DoiSession.doi_update">
+<code class="descname">doi_update</code><span class="sig-paren">(</span><em>doi</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/usgs_datatools/doi.html#DoiSession.doi_update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#usgs_datatools.doi.DoiSession.doi_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updating an existing DOI.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>doi</strong> &#8211; DOI Attributes as a dictionary.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">post response status code</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="usgs_datatools.doi.DoiSession.get_doi">
+<code class="descname">get_doi</code><span class="sig-paren">(</span><em>doi</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/usgs_datatools/doi.html#DoiSession.get_doi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#usgs_datatools.doi.DoiSession.get_doi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get DOI attributes function that returns the doi fields as a dictionary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parm doi:</th><td class="field-body">DOI string (&#8216;doi:10.5066/F7SB43S8&#8217;)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">dict (DOI fields as a dictionary)</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">doi</span><span class="o">.</span><span class="n">get_doi</span><span class="p">(</span><span class="s1">&#39;doi:10.5072/FK2J38SV7D&#39;</span><span class="p">)</span>
+<span class="go">{&#39;_csrf&#39;: &#39;cd...&#39;,</span>
+<span class="go"> &#39;abstractTypeDesc&#39;: &#39;test&#39;,</span>
+<span class="go"> &#39;addNewCreatorAuthor&#39;: None,</span>
+<span class="go"> &#39;addNewCreatorAuthorOrcid&#39;: None,</span>
+<span class="go"> &#39;authorValidity&#39;: &#39;valid&#39;,</span>
+<span class="go"> &#39;authors[0].authorName&#39;: &#39;Wright, Justin&#39;,</span>
+<span class="go"> &#39;authors[0].orcId&#39;: &#39;&#39;,</span>
+<span class="go"> &#39;authors[0].position&#39;: &#39;0&#39;,</span>
+<span class="go"> &#39;datasource_id&#39;: &#39;17501&#39;,</span>
+<span class="go"> &#39;date&#39;: &#39;&#39;,</span>
+<span class="go"> &#39;dateType&#39;: &#39;[Not Set]&#39;,</span>
+<span class="go"> &#39;identifier&#39;: &#39;doi:10.5072/FK2J38SV7D&#39;,</span>
+<span class="go"> &#39;projectDate&#39;: &#39;&#39;,</span>
+<span class="go"> &#39;projectDatePresent&#39;: None,</span>
+<span class="go"> &#39;projectEndDate&#39;: &#39;&#39;,</span>
+<span class="go"> &#39;projectEndYear&#39;: &#39;&#39;,</span>
+<span class="go"> &#39;projectStartDate&#39;: &#39;&#39;,</span>
+<span class="go"> &#39;projectStartYear&#39;: &#39;&#39;,</span>
+<span class="go"> &#39;projectYear&#39;: &#39;&#39;,</span>
+<span class="go"> &#39;projectYearPresent&#39;: None,</span>
+<span class="go"> &#39;pubYear&#39;: &#39;&#39;,</span>
+<span class="go"> &#39;publisher&#39;: &#39;U.S. Geological Survey&#39;,</span>
+<span class="go"> &#39;resourceType&#39;: &#39;Dataset&#39;,</span>
+<span class="go"> &#39;resourceURL&#39;: &#39;https://usgs.gov/14340938409&#39;,</span>
+<span class="go"> &#39;save&#39;: &#39;Submit&#39;,</span>
+<span class="go"> &#39;status&#39;: &#39;public&#39;,</span>
+<span class="go"> &#39;subject&#39;: &#39;2012&#39;,</span>
+<span class="go"> &#39;title&#39;: &#39;SERVICE TEST ITEM2017-09-25 14:32&#39;,</span>
+<span class="go"> &#39;usersAndTypes[bserna@usgs.gov]&#39;: &#39;PRIMARY&#39;,</span>
+<span class="go"> &#39;usersAndTypes[justinwright@usgs.gov]&#39;: &#39;PRIMARY&#39;,</span>
+<span class="go"> &#39;usersAndTypes[myTest]&#39;: &#39;PRIMARY&#39;}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="usgs_datatools.doi.datacite_search">
+<code class="descclassname">usgs_datatools.doi.</code><code class="descname">datacite_search</code><span class="sig-paren">(</span><em>doi</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/usgs_datatools/doi.html#datacite_search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#usgs_datatools.doi.datacite_search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Datacite API Querying</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>doi</strong> &#8211; published doi to query.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-usgs_datatools.mp">
+<span id="usgs-datatools-mp-module"></span><h2>usgs_datatools.mp module<a class="headerlink" href="#module-usgs_datatools.mp" title="Permalink to this headline">¶</a></h2>
+<p>Metadata Parser module.</p>
+<dl class="function">
+<dt id="usgs_datatools.mp.validate">
+<code class="descclassname">usgs_datatools.mp.</code><code class="descname">validate</code><span class="sig-paren">(</span><em>local_file</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/usgs_datatools/mp.html#validate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#usgs_datatools.mp.validate" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>local_file</strong> &#8211; Requires a valid XML filepath from your PC.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">json response</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">usgs_datatools</span> <span class="k">import</span> <span class="n">mp</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mp</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="s1">&#39;~/Documents/BlueRidgeParkway.xml&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="module-usgs_datatools.old_doi">
+<span id="usgs-datatools-old-doi-module"></span><h2>usgs_datatools.old_doi module<a class="headerlink" href="#module-usgs_datatools.old_doi" title="Permalink to this headline">¶</a></h2>
+<p>USGS DOI Tool module.</p>
+<dl class="function">
+<dt id="usgs_datatools.old_doi.datacite_search">
+<code class="descclassname">usgs_datatools.old_doi.</code><code class="descname">datacite_search</code><span class="sig-paren">(</span><em>doi</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/usgs_datatools/old_doi.html#datacite_search"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#usgs_datatools.old_doi.datacite_search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Datacite API Querying</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>doi</strong> &#8211; published doi to query.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="usgs_datatools.old_doi.doi_authenticate">
+<code class="descclassname">usgs_datatools.old_doi.</code><code class="descname">doi_authenticate</code><span class="sig-paren">(</span><em>r</em>, <em>url</em>, <em>username</em>, <em>password</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/usgs_datatools/old_doi.html#doi_authenticate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#usgs_datatools.old_doi.doi_authenticate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Authentication function for the usgs doi tool. Returns a tuple of session and cookie jar.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>r</strong> &#8211; The requests session object.</li>
+<li><strong>url</strong> &#8211; Specification of production DOI Tool (&#8220;p&#8221;) or staging (&#8220;s&#8221;).</li>
+<li><strong>username</strong> &#8211; Current USGS username (Active Directory).</li>
+<li><strong>password</strong> &#8211; Current USGS user password (Acitve Directory).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">tuple (Requests Session Object, Cookie Jar)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="usgs_datatools.old_doi.doi_create">
+<code class="descclassname">usgs_datatools.old_doi.</code><code class="descname">doi_create</code><span class="sig-paren">(</span><em>r</em>, <em>url</em>, <em>doi</em>, <em>cookie_jar</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/usgs_datatools/old_doi.html#doi_create"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#usgs_datatools.old_doi.doi_create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reserving a DOI.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>r</strong> &#8211; The requests session object.</li>
+<li><strong>url</strong> &#8211; Specification of production DOI Tool (&#8220;p&#8221;) or staging (&#8220;s&#8221;).</li>
+<li><strong>doi</strong> &#8211; DOI Attributes as a dictionary.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parm cookie_jar:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body"><p class="first">Cookie Jar returned from the doi_authenticate method.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">post response</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="usgs_datatools.old_doi.doi_update">
+<code class="descclassname">usgs_datatools.old_doi.</code><code class="descname">doi_update</code><span class="sig-paren">(</span><em>r</em>, <em>url</em>, <em>doi</em>, <em>cookie_jar</em>, <em>cur_time</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/usgs_datatools/old_doi.html#doi_update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#usgs_datatools.old_doi.doi_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updating an existing DOI. Expecting a session, environment specification, doi (dict), cookie jar</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>r</strong> &#8211; The requests session object.</li>
+<li><strong>url</strong> &#8211; Specification of production DOI Tool (&#8220;p&#8221;) or staging (&#8220;s&#8221;).</li>
+<li><strong>doi</strong> &#8211; DOI Attributes as a dictionary.</li>
+<li><strong>cur_time</strong> &#8211; need to remove this</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Parm cookie_jar:</th></tr>
+<tr class="field-even field"><td>&#160;</td><td class="field-body"><p class="first">Cookie Jar returned from the doi_authenticate method.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">post response</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="usgs_datatools.old_doi.get_doi">
+<code class="descclassname">usgs_datatools.old_doi.</code><code class="descname">get_doi</code><span class="sig-paren">(</span><em>r</em>, <em>url</em>, <em>doi</em>, <em>cookie_jar</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/usgs_datatools/old_doi.html#get_doi"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#usgs_datatools.old_doi.get_doi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get DOI attributes function that returns the doi fields as a dictionary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>r</strong> &#8211; The requests session object.</li>
+<li><strong>url</strong> &#8211; Specification of production DOI Tool (&#8220;p&#8221;) or staging (&#8220;s&#8221;).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parm doi:</th><td class="field-body"><p class="first">DOI string (&#8216;doi:10.5066/F7SB43S8&#8217;)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name" colspan="2">Parm cookie_jar:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><p class="first">Cookie Jar returned from the doi_authenticate method.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">tuple (Requests Session, DOI fields as a dictionary)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="usgs_datatools.old_doi.service_picker">
+<code class="descclassname">usgs_datatools.old_doi.</code><code class="descname">service_picker</code><span class="sig-paren">(</span><em>doi_configuration_url</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/usgs_datatools/old_doi.html#service_picker"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#usgs_datatools.old_doi.service_picker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Choses which doi service to use.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>doi_configuration_url</strong> &#8211; The DOI Tool environment you would like to specify. Production (&#8216;p&#8217;) or Staging (&#8216;s&#8217;).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">str &#8211; the doi tool url to use.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-usgs_datatools.usgs_datatools">
+<span id="usgs-datatools-usgs-datatools-module"></span><h2>usgs_datatools.usgs_datatools module<a class="headerlink" href="#module-usgs_datatools.usgs_datatools" title="Permalink to this headline">¶</a></h2>
+<p>main</p>
+</div>
+<div class="section" id="module-usgs_datatools">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-usgs_datatools" title="Permalink to this headline">¶</a></h2>
+<p>Top-level package for usgs_datatools.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">usgs_datatools package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-usgs_datatools.cli">usgs_datatools.cli module</a></li>
+<li><a class="reference internal" href="#module-usgs_datatools.doi">usgs_datatools.doi module</a></li>
+<li><a class="reference internal" href="#module-usgs_datatools.mp">usgs_datatools.mp module</a></li>
+<li><a class="reference internal" href="#module-usgs_datatools.old_doi">usgs_datatools.old_doi module</a></li>
+<li><a class="reference internal" href="#module-usgs_datatools.usgs_datatools">usgs_datatools.usgs_datatools module</a></li>
+<li><a class="reference internal" href="#module-usgs_datatools">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">usgs_datatools</a><ul>
+      <li>Previous: <a href="modules.html" title="previous chapter">usgs_datatools</a></li>
+      <li>Next: <a href="contributing.html" title="next chapter">Contributing</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/usgs_datatools.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Brandon Serna.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.5.6</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/usgs_datatools.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
