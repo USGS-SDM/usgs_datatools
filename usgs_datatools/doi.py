@@ -3,23 +3,27 @@
 import requests
 from bs4 import BeautifulSoup
 import warnings
+
 warnings.filterwarnings("ignore")  # avoid confusion for cert issues
 
 
-class DoiSession():
+class DoiSession:
     """ DoiSession enables actions to be taken on the USGS DOI Tool"""
-    def __init__(self, env='staging'):
+
+    def __init__(self, env="staging"):
         """init
 
         :param env: optional default is "staging"
         """
-        if env == 'production':
-            self._base_doi_url = 'https://www1.usgs.gov/csas/doi/'
-        if env == 'dev':
-            self._base_doi_url = 'https://www1-dev.snafu.cr.usgs.gov/csas/doi/'
-        else:
-            print('Using Staging Environment\n')
-            self._base_doi_url = 'https://www1-staging.snafu.cr.usgs.gov/csas/doi/'
+        if env == "production":
+            self._base_doi_url = "https://www1.usgs.gov/csas/doi/"
+        if env == "dev":
+            self._base_doi_url = "https://www1-dev.snafu.cr.usgs.gov/csas/doi/"
+        elif env == "staging":
+            print("Using Staging Environment\n")
+            self._base_doi_url = (
+                "https://www1-staging.snafu.cr.usgs.gov/csas/doi/"
+            )
 
         self._session = requests.Session()
 
@@ -32,14 +36,26 @@ class DoiSession():
         # Fetch application cookie for follow requests.
         cookie_getter = self._session.get(self._base_doi_url, verify=False)
 
-        self._csrf = str(cookie_getter.content).split('name="_csrf" value="')[1].split('"')[0]
+        self._csrf = (
+            str(cookie_getter.content)
+            .split('name="_csrf" value="')[1]
+            .split('"')[0]
+        )
         self._username = username  # Save username
 
-        response = self._session.post(self._base_doi_url + 'j_spring_security_check', data = {'j_username': self._username, 'j_password': password, '_csrf': self._csrf}, verify = False) # , verify = False
+        response = self._session.post(
+            self._base_doi_url + "j_spring_security_check",
+            data={
+                "j_username": self._username,
+                "j_password": password,
+                "_csrf": self._csrf,
+            },
+            verify=False,
+        )  # , verify = False
 
-        if 'crowd.token_key' not in self._session.cookies:
-            raise Exception('Login failed')
-        self._crowdToken = self._session.cookies['crowd.token_key']
+        if "crowd.token_key" not in self._session.cookies:
+            raise Exception("Login failed")
+        self._crowdToken = self._session.cookies["crowd.token_key"]
         return self
 
     def get_doi(self, doi):
@@ -84,23 +100,27 @@ class DoiSession():
          'usersAndTypes[myTest]': 'PRIMARY'}
         """
         fields = {}
-        fetch = self._session.get(self._base_doi_url + 'form.htm?doi=' + doi, verify=False)
+        fetch = self._session.get(
+            self._base_doi_url + "form.htm?doi=" + doi, verify=False
+        )
         soup = BeautifulSoup(fetch.text)
 
-        for inp in soup.find_all('input', ):
-            fields[inp.get('name')] = inp.get('value')
-        for ta in soup.find_all('textarea',):
-            fields[ta.get('name')] = ta.text
-        for i in soup.find_all('select'):
-            o = i.find_all('option')
+        for inp in soup.find_all("input"):
+            fields[inp.get("name")] = inp.get("value")
+        for ta in soup.find_all("textarea"):
+            fields[ta.get("name")] = ta.text
+        for i in soup.find_all("select"):
+            o = i.find_all("option")
             for ii in o:
-                if ii.get('selected'):
-                    fields[i.get('name')] = ii.get('value')
+                if ii.get("selected"):
+                    fields[i.get("name")] = ii.get("value")
         try:
             del fields[None]
         except Exception:
             pass
-        fields['status'] = 'reserved'  # Scraping issue defaults to "public" -- tmp fix
+        fields[
+            "status"
+        ] = "reserved"  # Scraping issue defaults to "public" -- tmp fix
         return fields
 
     def doi_update(self, doi):
@@ -110,7 +130,9 @@ class DoiSession():
 
         :returns: post response status code
         """
-        response_update = self._session.post(self._base_doi_url + 'result.htm', data=doi, verify=False)
+        response_update = self._session.post(
+            self._base_doi_url + "result.htm", data=doi, verify=False
+        )
         return response_update.status_code
 
     def doi_create(self, doi):
@@ -120,19 +142,28 @@ class DoiSession():
 
         :returns: post response
         """
-        doi['_csrf'] = self._csrf  # Required for form submit.
-        doi['save'] = 'Submit'  # Required for form submit.
+        doi["_csrf"] = self._csrf  # Required for form submit.
+        doi["save"] = "Submit"  # Required for form submit.
 
-        response_create = self._session.post(self._base_doi_url + 'result.htm', data=doi, verify=False)
+        response_create = self._session.post(
+            self._base_doi_url + "result.htm", data=doi, verify=False
+        )
 
         if response_create.status_code == 200:
             try:
                 # Retrieve DOI
-                doi_number = response_create.text.split('Your DOI has been saved: ')[1].split('</div>')[0].replace(" ", "").replace("\n", "")
+                doi_number = (
+                    response_create.text.split("Your DOI has been saved: ")[1]
+                    .split("</div>")[0]
+                    .replace(" ", "")
+                    .replace("\n", "")
+                )
                 return doi_number
             except Exception as e:
-                return('Sorry an error occured with the data sent into the DOI Tool. Please ensure all required fields are filled out.')
-        return('An error occured, status code: ' + str(response_create.status_code))
+                return "Sorry an error occured with the data sent into the DOI Tool. Please ensure all required fields are filled out."
+        return "An error occured, status code: " + str(
+            response_create.status_code
+        )
 
 
 def datacite_search(doi):
@@ -142,8 +173,8 @@ def datacite_search(doi):
     :type: str
     """
     try:
-        doi = doi.replace('doi:', '')  # If improper format strip.
-        r = requests.get('https://api.datacite.org/works/' + str(doi))
+        doi = doi.replace("doi:", "")  # If improper format strip.
+        r = requests.get("https://api.datacite.org/works/" + str(doi))
         return r.json()
     except Exception as e:
         print(e)
@@ -154,8 +185,8 @@ def add_primary_doi_manager(doi_dict, username):
     :param doi_dict: dictionary that represents a doi
     :param username: AD username
     """
-    key = 'usersAndTypes[' + username + ']'
-    doi_dict[key] = 'PRIMARY'
+    key = "usersAndTypes[" + username + "]"
+    doi_dict[key] = "PRIMARY"
 
 
 def add_backup_doi_manager(doi_dict, username):
@@ -163,6 +194,5 @@ def add_backup_doi_manager(doi_dict, username):
     :param doi_dict: dictionary that represents a doi
     :param username: AD username
     """
-    key = 'usersAndTypes[' + username + ']'
-    doi_dict[key] = 'BACKUP'
-
+    key = "usersAndTypes[" + username + "]"
+    doi_dict[key] = "BACKUP"
