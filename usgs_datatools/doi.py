@@ -34,14 +34,14 @@ class DoiSession:
             dois can be created.
         """
         if env == "production":
-            self._base_doi_url = "https://www1.usgs.gov/csas/doi/"
+            self._base_doi_url = "https://www1.usgs.gov/csas/dmapi/"
         if env == "dev":
             self._base_doi_url = (
                 "https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/"
             )
         else:
             self._base_doi_url = (
-                "https://www1-staging.snafu.cr.usgs.gov/csas/doi/"
+                "https://www1-staging.snafu.cr.usgs.gov/csas/dmapi/"
             )
 
         self._session = requests.Session()
