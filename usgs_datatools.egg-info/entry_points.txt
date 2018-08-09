@@ -1,0 +1,3 @@
+[console_scripts]
+usgs_datatools = usgs_datatools.cli:main
+

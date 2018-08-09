@@ -1,0 +1,3 @@
+{
+  "tests/test_usgs_datatools.py::test_doi_get_doi": true
+}
