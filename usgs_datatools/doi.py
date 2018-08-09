@@ -35,11 +35,7 @@ class DoiSession:
         """
         if env == "production":
             self._base_doi_url = "https://www1.usgs.gov/csas/dmapi/"
-<<<<<<< HEAD
         elif env == "dev":
-=======
-        if env == "dev":
->>>>>>> 6c7d1fde15068be36c6376069af74bb278a4fb75
             self._base_doi_url = (
                 "https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/"
             )
