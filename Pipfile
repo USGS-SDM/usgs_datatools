@@ -15,6 +15,7 @@ requests = "==2.18.4"
 PyYAML = "==3.12"
 lxml = "*"
 pandas = "*"
+bumpversion = "*"
 
 [dev-packages]
 bumpversion = "==0.5.3"

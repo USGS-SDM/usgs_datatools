@@ -35,62 +35,39 @@ class DoiSession:
         """
         if env == "production":
             self._base_doi_url = "https://www1.usgs.gov/csas/dmapi/"
+<<<<<<< HEAD
         elif env == "dev":
+=======
+        if env == "dev":
+>>>>>>> 6c7d1fde15068be36c6376069af74bb278a4fb75
             self._base_doi_url = (
                 "https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/"
             )
         else:
             self._base_doi_url = (
-                "https://www1-staging.snafu.cr.usgs.gov/csas/doi/"
+                "https://www1-staging.snafu.cr.usgs.gov/csas/dmapi/"
             )
 
         self._session = requests.Session()
 
     def doi_authenticate(self, username, password):
-        """User authentication
+        """User authentication updated for the new dmapi.
 
         :param username: String, current USGS username (Active Directory).
         :param password: String, current USGS user password (Acitve Directory).
         """
-        if (
-            self._base_doi_url
-            == "https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/"
-        ):
-            response_status = self._session.post(
-                self._base_doi_url + "login",
-                json={"username": username, "password": password},
-            )
-            if response_status.status_code == 200:
-                return self
-            else:
-                return {
-                    "error": response_status.status_code,
-                    "message": response_status.text,
-                }
-        # Fetch application cookie for follow requests.
-        cookie_getter = self._session.get(self._base_doi_url, verify=False)
-
-        self._csrf = (
-            str(cookie_getter.content)
-            .split('name="_csrf" value="')[1]
-            .split('"')[0]
+        response_status = self._session.post(
+            self._base_doi_url + "login",
+            json={"username": username, "password": password},
         )
-        self._username = username  # Save username
+        if response_status.status_code == 200:
+            return self
+        else:
+            return {
+                "error": response_status.status_code,
+                "message": response_status.text,
+            }
 
-        self._session.post(
-            self._base_doi_url + "j_spring_security_check",
-            data={
-                "j_username": self._username,
-                "j_password": password,
-                "_csrf": self._csrf,
-            },
-            verify=False,
-        )
-
-        if "crowd.token_key" not in self._session.cookies:
-            raise Exception("Login failed")
-        self._crowdToken = self._session.cookies["crowd.token_key"]
-        return self
 
     def get_my_dois(self):
         """Current users dois"""
@@ -146,43 +123,17 @@ class DoiSession:
          'usersAndTypes[justinwright@usgs.gov]': 'PRIMARY',
          'usersAndTypes[myTest]': 'PRIMARY'}
         """
-        if (
-            self._base_doi_url
-            == "https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/"
-        ):
-            response_status = self._session.get(
-                self._base_doi_url + "doi/" + doi
-            )
-            if response_status == 200:
-                return response_status.json()
-            else:
-                return {
-                    "error": response_status.status_code,
-                    "message": response_status.text,
-                }
-        fields = {}
-        fetch = self._session.get(
-            self._base_doi_url + "form.htm?doi=" + doi, verify=False
+        response_status = self._session.get(
+            self._base_doi_url + "doi/" + doi
         )
-        soup = BeautifulSoup(fetch.text)
+        if response_status == 200:
+            return response_status.json()
+        else:
+            return {
+                "error": response_status.status_code,
+                "message": response_status.text,
+            }
 
-        for inp in soup.find_all("input"):
-            fields[inp.get("name")] = inp.get("value")
-        for ta in soup.find_all("textarea"):
-            fields[ta.get("name")] = ta.text
-        for i in soup.find_all("select"):
-            o = i.find_all("option")
-            for ii in o:
-                if ii.get("selected"):
-                    fields[i.get("name")] = ii.get("value")
-        try:
-            del fields[None]
-        except Exception:
-            pass
-        fields[
-            "status"
-        ] = "reserved"  # Scraping issue defaults to "public" -- tmp fix
-        return fields
 
     def doi_update(self, doi):
         """ Updating an existing DOI.
@@ -191,24 +142,17 @@ class DoiSession:
 
         :returns: post response status code
         """
-        if (
-            self._base_doi_url
-            == "https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/"
-        ):
-            response_status = self._session.put(
-                self._base_doi_url + "doi/" + doi["doi"], json=doi
-            )
-            if response_status.status_code == 200:
-                return response_status.json()
-            else:
-                return {
-                    "error": response_status.status_code,
-                    "message": response_status.text,
-                }
-        response_update = self._session.post(
-            self._base_doi_url + "result.htm", data=doi, verify=False
+        response_status = self._session.put(
+            self._base_doi_url + "doi/" + doi["doi"], json=doi
         )
-        return response_update.status_code
+        if response_status.status_code == 200:
+            return response_status.json()
+        else:
+            return {
+                "error": response_status.status_code,
+                "message": response_status.text,
+            }
+
 
     def doi_create(self, doi):
         """ Reserving a DOI.
@@ -219,44 +163,16 @@ class DoiSession:
 
         >>> doi_create(doi_dict)
         """
-        if (
-            self._base_doi_url
-            == "https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/"
-        ):
-            response_status = self._session.post(
-                self._base_doi_url + "doi/", json=doi
-            )
-            if response_status.status_code == 200:
-                return response_status.text
-            else:
-                return {
-                    "error": response_status.status_code,
-                    "message": response_status.text,
-                }
-        doi["_csrf"] = self._csrf  # Required for form submit.
-        doi["save"] = "Submit"  # Required for form submit.
-
-        response_create = self._session.post(
-            self._base_doi_url + "result.htm", data=doi, verify=False
+        response_status = self._session.post(
+            self._base_doi_url + "doi/", json=doi
         )
-
-        try:
-            # Retrieve DOI
-            doi_number = (
-                response_create.text.split("Your DOI has been saved: ")[1]
-                .split("</div>")[0]
-                .replace(" ", "")
-                .replace("\n", "")
-            )
-            if "doi" in doi_number:
-                return doi_number
-            else:
-                return None
-        except Exception as e:
-            return "Sorry an error occured with the data sent into the DOI Tool. Please ensure all required fields are filled out."
-        return "An error occured, status code: " + str(
-            response_create.status_code
-        )
+        if response_status.status_code == 200:
+            return response_status.text
+        else:
+            return {
+                "error": response_status.status_code,
+                "message": response_status.text,
+            }
 
 
 def datacite_search(doi):
