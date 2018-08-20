@@ -122,7 +122,8 @@ class DoiSession:
         response_status = self._session.get(
             self._base_doi_url + "doi/" + doi
         )
-        if response_status == 200:
+
+        if response_status.status_code == 200:
             return response_status.json()
         else:
             return {
@@ -141,6 +142,7 @@ class DoiSession:
         response_status = self._session.put(
             self._base_doi_url + "doi/" + doi["doi"], json=doi
         )
+
         if response_status.status_code == 200:
             return response_status.json()
         else:
