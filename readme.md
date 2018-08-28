@@ -46,7 +46,7 @@ doi_session.doi_create({'title': 'USGS Datatools Test Creation',
 The preferred method for installation is using the latest version release here on github.
 
 ```sh
-pip install -e git+https://github.com/bserna-usgs/usgs_datatools.git@latest
+pip install git+https://github.com/bserna-usgs/usgs_datatools.git
 ```
 
 __Local files__
