@@ -5,13 +5,10 @@
 
 import pytest
 import yaml
-import requests
 import os
-from bs4 import BeautifulSoup
 
 from click.testing import CliRunner
 
-from usgs_datatools import usgs_datatools
 import usgs_datatools.doi as doi
 import usgs_datatools.mp as mp
 from usgs_datatools import cli
@@ -70,10 +67,10 @@ def test_doi_get_doi():
     credentials = yaml.load(open(os.path.expanduser('~') + '/cred.yaml').read())
     doi_session = doi.DoiSession()
 
-    doi_session.doi_authenticate( credentials['application_credentials']['username'], credentials['application_credentials']['password'])
+    doi_session.doi_authenticate(credentials['application_credentials']['username'], credentials['application_credentials']['password'])
 
     # This test works with the Staging application when the below DOI exists.
-    sample_doi = doi_session.get_doi('doi:10.5072/FK2J38SV7D')
+    sample_doi = doi_session.get_doi('doi:10.5072/S977GF16')
 
     assert len(sample_doi) > 20
 
