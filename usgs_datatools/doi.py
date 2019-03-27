@@ -71,7 +71,10 @@ class DoiSession:
             self._base_doi_url + "doi/" + "all"
         )
         if response_status.status_code == 200:
-            return response_status.json()
+            all_dois = []
+            for doi_json in response_status.json():
+                all_dois.append(Doi(self, doi_json=doi_json))
+            return all_dois
         else:
             return {
                 "error": response_status.status_code,
@@ -113,6 +116,10 @@ class DoiSession:
             'created': '2018-09-26',
             'modified': '2018-09-26'}
         """
+        doi_json = self.get_doi_json(doi)
+        return Doi(self, doi_json=doi_json)
+
+    def get_doi_json(self, doi):
         response_status = self._session.get(
             self._base_doi_url + "doi/" + doi
         )
@@ -164,6 +171,81 @@ class DoiSession:
                 "message": response_status.text,
             }
 
+
+class Doi:
+
+    def __init__(self, session, doi=None, doi_json=None):
+        self.session = session
+
+        if doi is not None:
+            self.doi = doi
+            self.json = self.session.get_doi_json(self.doi)
+        elif doi_json is not None:
+            self.json = doi_json
+
+        #all of the keys in our json become methods on our object
+        for key in self.json.keys():
+            self.__dict__[key] = self.json[key]
+
+
+    def add_author(self, author_name, orc_id='', position=None):
+        """
+
+        :param author_name:
+        :param orc_id:
+        :param email:
+        :return:
+        """
+        assert author_name != ''
+
+
+
+
+        authors = self.json['users']
+        if position is None:
+            position = len(authors)+1
+        authors.append({'authorName':author_name,
+                        'orcId': orc_id,
+                        'nameType': 'Personal',
+                        'position': 1})
+        self.json['authors'] = authors
+
+        self.update_record()
+
+    def _update_json(self):
+        for k, v in self.__dict__.items():
+            if k in self.json:
+                self.json[k] = v
+
+        if 'files' in self.json:
+            self.json['files'] = [f.json for f in self.files]
+
+        if 'facets' in self.json:
+            self.json['facets'] = [f.json for f in self.facets]
+        #     if 'files' in self.json['facets'][0]:
+        #         self.json['facets'][0]['files'] = [f.json for f in self.files]
+
+
+    def update_record(self):
+        self._update_json()
+        self.session.doi_update(self.json)
+
+
+    def __str__(self):
+        """
+        string representation of a DOI object
+
+        :return: string
+        """
+        return f"""<usgs_datatools.doi.Doi object>
+        
+        \tdoi: {self.json['doi']}
+        \ttitle: {self.json['title'][:140]}...
+        \turl: {self.json['url']}
+        """
+
+    def __repr__(self):
+        return self.__str__()
 
 def datacite_search(doi):
     """Datacite API Querying.
