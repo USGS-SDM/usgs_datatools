@@ -51,15 +51,9 @@ pip install git+https://github.com/bserna-usgs/usgs_datatools.git
 
 __Local files__
 
-If you are working with a downloaded copy of this package here's some helpful steps
+If you are working with a downloaded copy of this package please review 'requirements.txt'
 
-Install python requirements (using pipenv)
-
-```
-pipenv install
-```
-
-I will periodically update the requirements.txt file as well
+This file will be periodically updated.
 
 ```
 pip install -r requirements.txt
