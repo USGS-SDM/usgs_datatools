@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d66e9f95-94e8-47dd-a861-5ca7d02febe0" name="Default Changelist" comment="" />
+    <list default="true" id="d66e9f95-94e8-47dd-a861-5ca7d02febe0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/.ipynb_checkpoints/DataCite API Exploration-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/.ipynb_checkpoints/DataCite API Exploration-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/.ipynb_checkpoints/USGS DOI Tool Python Module-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/.ipynb_checkpoints/USGS DOI Tool Python Module-checkpoint.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/DataCite API Exploration.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/DataCite API Exploration.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/notebooks/USGS DOI Tool Python Module.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/notebooks/USGS DOI Tool Python Module.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/usgs_datatools/doi.py" beforeDir="false" afterPath="$PROJECT_DIR$/usgs_datatools/doi.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +35,16 @@
           <entry key="Python" value="8" />
         </counts>
       </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="py" value="52" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Python" value="52" />
+        </counts>
+      </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
@@ -35,8 +52,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/usgs_datatools/doi.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-661">
-              <caret line="35" column="34" lean-forward="true" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="67" />
+            <state relative-caret-position="612">
+              <caret line="90" column="48" lean-forward="true" selection-start-line="90" selection-start-column="48" selection-end-line="90" selection-end-column="48" />
               <folding>
                 <element signature="e#199#214#0" expanded="true" />
               </folding>
@@ -71,14 +88,23 @@
     <findStrings>
       <find>datasource</find>
       <find>author</find>
+      <find>request</find>
+      <find>update</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/usgs_datatools/doi.py" />
+      </list>
+    </option>
+  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1485" />
-    <option name="y" value="256" />
+    <option name="x" value="1072" />
+    <option name="y" value="127" />
     <option name="width" value="1714" />
     <option name="height" value="1047" />
   </component>
@@ -156,7 +182,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1485" y="256" width="1714" height="1047" extended-state="0" />
+    <frame x="1072" y="127" width="1714" height="1047" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26968974" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -197,19 +224,6 @@
         <state relative-caret-position="-2479" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/usgs_datatools/doi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-661">
-          <caret line="35" column="34" lean-forward="true" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="67" />
-          <folding>
-            <element signature="e#199#214#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/usgs_datatools/usgs_datatools.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/usgs_datatools/basis.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -221,6 +235,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/usgs_datatools/cli.py">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/usgs_datatools/usgs_datatools.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/usgs_datatools/doi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="90" column="48" lean-forward="true" selection-start-line="90" selection-start-column="48" selection-end-line="90" selection-end-column="48" />
+          <folding>
+            <element signature="e#199#214#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
     </entry>
   </component>
 </project>

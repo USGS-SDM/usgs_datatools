@@ -78,6 +78,19 @@ class DoiSession:
                 "message": response_status.text,
             }
 
+    def get_dois_by_username(self, username):
+        """Current users dois"""
+        response_status = self._session.get(
+            self._base_doi_url + "search/username/" + username
+        )
+        if response_status.status_code == 200:
+            return response_status.json()
+        else:
+            return {
+                "error": response_status.status_code,
+                "message": response_status.text,
+            }
+
     def get_doi(self, doi):
         """Get DOI attributes function that returns the doi fields as a dictionary.
 
