@@ -1,0 +1,161 @@
+doi:10.5066/F7CJ8CC2 : IP-088402
+An error occurred when attempting to process your request: The url https://www.sciencebase.gov/catalog/item/59552cc1e4b04e08be5327ba has already been assigned to an existing DOI. Each DOI must have a unique URL.
+
+doi:10.5066/F7P84B5G : IP-096661
+An error occurred when attempting to process your request: Author Ivahnenko, Tamara has an incorrectly formatted ORCID.
+
+doi:10.5066/F7R20ZJW : IP-079640
+An error occurred when attempting to process your request: Author Balistrieri, L.S. has an incorrectly formatted ORCID.
+
+doi:10.5066/F7TM7930 : IP-108171
+An error occurred when attempting to process your request: Author Conner, William H. has an incorrectly formatted ORCID.
+
+doi:10.5066/F7SJ1JVG : IP-093953
+An error occurred when attempting to process your request: Author Jonghun Kam has an incorrectly formatted ORCID.
+
+doi:10.5066/F75Q4T70 : IP-077084
+An error occurred when attempting to process your request: Author Jones, William R has an incorrectly formatted ORCID.
+
+doi:10.5066/F7G44NG0 : IP-081433
+An error occurred when attempting to process your request: Author Evan H.C. Grant has an incorrectly formatted ORCID.
+
+doi:10.5066/P9472SZW : IP-098388
+An error occurred when attempting to process your request: Author Aragon, Ramiro has an incorrectly formatted ORCID.
+
+doi:10.5066/F74Q7T7T : IP-093989
+An error occurred when attempting to process your request: Author Pierce, Clay L. has an incorrectly formatted ORCID.
+
+doi:10.5066/F7M32SW5 : IP-075421
+An error occurred when attempting to process your request: Missing dateType parameter
+
+doi:10.5066/F76972HS : IP-091089
+An error occurred when attempting to process your request: Author Jay V. Gedir has an incorrectly formatted ORCID.
+
+doi:10.5066/F7S75FH5 : IP-090199
+An error occurred when attempting to process your request: Author Eads, Samantha L has an incorrectly formatted ORCID.
+
+doi:10.5066/F7R20ZG0 : IP-074912
+An error occurred when attempting to process your request: Missing dateType parameter
+
+doi:10.5066/F7571B94 : IP-090189
+An error occurred when attempting to process your request: Author Pearse, Ian S. has an incorrectly formatted ORCID.
+
+doi:10.5066/F78S4NT5 : IP-087487
+An error occurred when attempting to process your request: Author Brooks, Thomas, W. has an incorrectly formatted ORCID.
+
+doi:10.5066/F7V1230Q : IP-084106
+An error occurred when attempting to process your request: Author Kauahikaua, James P. has an incorrectly formatted ORCID.
+
+doi:10.5066/P93ONIQT : IP-099456
+An error occurred when attempting to process your request: Author Lee J Foster has an incorrectly formatted ORCID.
+
+doi:10.5066/P9OEFCOR : IP-097199
+An error occurred when attempting to process your request: Author Spruce, Joseph P has an incorrectly formatted ORCID.
+
+doi:10.5066/F74M92P8 : IP-080294
+An error occurred when attempting to process your request: Author Barbora Kubatova has an incorrectly formatted ORCID.
+
+doi:10.5066/F7H1318R : IP-095376
+An error occurred when attempting to process your request: Author Bera, Maitreyee has an incorrectly formatted ORCID.
+
+doi:10.5066/F7HD7TV6 : IP-090693
+An error occurred when attempting to process your request: Author Pearse, Ian Seth has an incorrectly formatted ORCID.
+
+doi:10.5066/F7QJ7G6S : IP-082284
+An error occurred when attempting to process your request: Author Amanda N. Rice has an incorrectly formatted ORCID.
+
+doi:10.5066/F78K773V : IP-060488
+An error occurred when attempting to process your request: Missing dateType parameter
+
+doi:10.5066/F7BK1B8P : IP-090056
+An error occurred when attempting to process your request: Author Cornman, Robert S. has an incorrectly formatted ORCID.
+
+doi:10.5066/F7V69HSC : IP-090171
+An error occurred when attempting to process your request: Author Whelan, Gary has an incorrectly formatted ORCID.
+
+doi:10.5066/F7377766 : IP-087779
+An error occurred when attempting to process your request: The url https://www.sciencebase.gov/catalog/item/593ee94ae4b0764e6c61bb33 has already been assigned to an existing DOI. Each DOI must have a unique URL.
+
+doi:10.5066/F7NS0SS8 : IP-089728
+An error occurred when attempting to process your request: Author Constance A. Kersten has an incorrectly formatted ORCID.
+
+doi:10.5066/F75X276T : IP-086418
+An error occurred when attempting to process your request: The url https://www.sciencebase.gov/catalog/item/58f796a7e4b0b7ea5451f222 has already been assigned to an existing DOI. Each DOI must have a unique URL.
+
+doi:10.5066/P9DWV93U : IP-097876
+An error occurred when attempting to process your request: Author Ferrante, Jason Allan has an incorrectly formatted ORCID.
+
+doi:10.5066/P98NHB82 : IP-098435
+An error occurred when attempting to process your request: Author Nichols, Alexander has an incorrectly formatted ORCID.
+
+doi:10.5066/F78914ZS : IP-092090
+An error occurred when attempting to process your request: Author Briggs, Martin A. has an incorrectly formatted ORCID.
+
+doi:10.5066/F7FX77K4 : IP-080310
+An error occurred when attempting to process your request: Author Rosecrans, Celia Z. has an incorrectly formatted ORCID.
+
+doi:10.5066/F7WS8S6V : IP-086457
+An error occurred when attempting to process your request: Author White, Barbara has an incorrectly formatted ORCID.
+
+doi:10.5066/F70R9MFW : IP-067069
+An error occurred when attempting to process your request: The url https://www.sciencebase.gov/catalog/item/55ad2901e4b066a24924099b has already been assigned to an existing DOI. Each DOI must have a unique URL.
+
+doi:10.5066/F77W6B4Z : IP-090881
+An error occurred when attempting to process your request: Author Christensen, Eric D. has an incorrectly formatted ORCID.
+
+doi:10.5066/F7B8569W : IP-082201
+An error occurred when attempting to process your request: Doi contains an invalid user. Users must have a valid USGS email address.
+
+doi:10.5066/F75H7DS8 : IP-087599
+An error occurred when attempting to process your request: The url https://www.sciencebase.gov/catalog/item/592f0a82e4b0e9bd0ea79402 has already been assigned to an existing DOI. Each DOI must have a unique URL.
+
+doi:10.5066/F70G3J23 : IP-089779
+An error occurred when attempting to process your request: Author Bill Loftus has an incorrectly formatted ORCID.
+
+doi:10.5066/F7C53JCF : IP-087395
+An error occurred when attempting to process your request: The url https://www.sciencebase.gov/catalog/item/592727dfe4b0b7ff9fb5dca1 has already been assigned to an existing DOI. Each DOI must have a unique URL.
+
+doi:10.5066/F7MG7NSV : IP-095692
+An error occurred when attempting to process your request: Author Guerry O Holm Jr has an incorrectly formatted ORCID.
+
+doi:10.5066/P9X6N80F : IP-097327
+An error occurred when attempting to process your request: Author Hitt, Nathaniel P. has an incorrectly formatted ORCID.
+
+doi:10.5066/F7SN085V : IP-093952
+An error occurred when attempting to process your request: Author Jonghun Kam has an incorrectly formatted ORCID.
+
+doi:10.5066/F71J98QK : IP-090642
+An error occurred when attempting to process your request: Author Boyte, Stephen P. has an incorrectly formatted ORCID.
+
+doi:10.5066/F7ST7N10 : IP-084679
+An error occurred when attempting to process your request: Author Jennifer Cartwright has an incorrectly formatted ORCID.
+
+doi:10.5066/F71G0K17 : IP-087834
+An error occurred when attempting to process your request: Author Biggins, Dean E. has an incorrectly formatted ORCID.
+
+doi:10.5066/F7251HDX : IP-078211
+An error occurred when attempting to process your request: Author King, Lindsey R. has an incorrectly formatted ORCID.
+
+doi:10.5066/F7BK19GZ : IP-079019
+An error occurred when attempting to process your request: The url https://www.sciencebase.gov/catalog/item/57d1c97de4b0571647cfd3d3 has already been assigned to an existing DOI. Each DOI must have a unique URL.
+
+doi:10.5066/F7H13050 : IP-080860
+An error occurred when attempting to process your request: Author Fleskes, Joseph P. has an incorrectly formatted ORCID.
+
+doi:10.5066/F7B856CS : IP-087207
+An error occurred when attempting to process your request: Author James W Cain has an incorrectly formatted ORCID.
+
+doi:10.5066/P9YWMMHG : IP-098766
+An error occurred when attempting to process your request: Author Galeone, Daniel G. has an incorrectly formatted ORCID.
+
+doi:10.5066/P9LM0J0F : IP-094910
+An error occurred when attempting to process your request: Author Stricker, Craig A. has an incorrectly formatted ORCID.
+
+doi:10.5066/P9MOHC0C : IP-097440
+An error occurred when attempting to process your request: Author James B. Grace has an incorrectly formatted ORCID.
+
+doi:10.5066/P9KBRSO4 : IP-097720
+An error occurred when attempting to process your request: Author Laurel Gutenberg has an incorrectly formatted ORCID.
+
+doi:10.5066/F7BR8Q75 : IP-060228
+An error occurred when attempting to process your request: Missing dateType parameter
