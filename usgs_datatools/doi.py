@@ -32,16 +32,18 @@ class DoiSession:
         :param env: (optional) string, the default is staging where test
             dois can be created.
         """
-        if env == "production":
-            self._base_doi_url = "https://www1.usgs.gov/csas/dmapi/"
+        if env == "localhost":
+            self._base_doi_url = "http://localhost/dmapi/"
+        elif env == "localhost_secure":
+            self._base_doi_url = "https://localhost:8443/dmapi/"
         elif env == "dev":
-            self._base_doi_url = (
-                "https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/"
-            )
+            self._base_doi_url = "https://www1-dev.snafu.cr.usgs.gov/csas/dmapi/"
+        elif env == "beta":
+            self._base_doi_url = "https://www1-beta.usgs.gov/csas/dmapi/"
+        elif env == "production":
+            self._base_doi_url = "https://www1.usgs.gov/csas/dmapi/"
         else:
-            self._base_doi_url = (
-                "https://www1-staging.snafu.cr.usgs.gov/csas/dmapi/"
-            )
+            self._base_doi_url = "https://www1-staging.snafu.cr.usgs.gov/csas/dmapi/"
 
         self._session = requests.Session()
 
